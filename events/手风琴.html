@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body,
+        button,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-size: 16px;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* accordion：手风琴 样式 */
+        #accordion {
+            width: 80vw;
+        }
+
+        button {
+            background-color: yellow;
+            width: 100%;
+            border: none;
+            padding: 10px 10px;
+            text-align: left;
+            position: relative;
+            animation: alternate;
+            cursor: pointer;
+        }
+
+        button::after {
+            content: "+";
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .content {
+            /* height: 0; */
+            max-height: 0;
+            overflow: hidden;
+            background-color: coral;
+            transition: .5s;
+        }
+
+        .content p {
+            padding: 0 20px;
+        }
+
+        button:hover {
+            background-color: rebeccapurple;
+        }
+
+        .show::after {
+            content: '-';
+        }
+
+        .show+.content {
+            max-height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- accordion：手风琴 -->
+    <section id="accordion">
+        <div class="item">
+            <button>第一部分</button>
+            <div class="content">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quia facilis similique tenetur ullam
+                    aliquid eius recusandae blanditiis debitis ad repellat esse quas quod laudantium, numquam incidunt
+                    quos dolorem beatae?
+                    Quasi et maxime omnis enim eaque quis, saepe ipsa a eos, repellendus magni blanditiis alias facilis
+                    odit culpa illum minima praesentium.
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <button>第二部分</button>
+            <div class="content">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quia facilis similique tenetur ullam
+                    aliquid eius recusandae blanditiis debitis ad repellat esse quas quod laudantium, numquam incidunt
+                    quos dolorem beatae?
+
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <button>第三部分</button>
+            <div class="content">
+                <p>
+                    Quasi et maxime omnis enim eaque quis, saepe ipsa a eos, repellendus magni blanditiis alias facilis
+                    odit culpa illum minima praesentium.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const accordion = document.querySelector('#accordion')
+        const itemArr = document.querySelectorAll('.item')
+        const content = document.querySelectorAll('.content')
+        const btnArr = document.querySelectorAll('button')
+
+        let last = btnArr[0]
+
+        btnArr.forEach((btn) => {
+            //点击btn：
+            btn.addEventListener('click', () => {
+                //条件1：btn.classList.contains('show') //查询指定元素是否有类性名：查询btn的html里是否有show
+                //条件2：btn === last
+                if (btn === last) {
+                    //点击的是同一个按钮
+                    btn.classList.toggle('show') //toggle有类名就删除，没有就添加
+                } else {
+                    //点击的不是同一个按钮的时执行
+                    last.classList.remove('show') //删除
+                    //show：展示 show：css样式里
+                    btn.classList.add('show') //添加
+                    last = btn
+                }
+            })
+        })
+
+        // btnArr.forEach((btn) => {
+        //     //点击btn：
+        //     btn.addEventListener('click', () => {
+        //         //2修改上一个btn的macx-height = 0
+        //         last.nextElementSibling.style.maxHeight = '0'
+        //         //1.修改nextElementSibling的height
+        //         btn.nextElementSibling.style.maxHeight = '200px'
+        //         //更新last为当前点击的btn
+        //         last = btn
+        //     })
+        // })
+    </script>
+</body>
+
+</html>
+
+<!-- 
+        需求：
+        1.点击那个展开那个
+        2.点击A展开显示-号，再点击A折叠显示+号
+        3.点击B展开B，折叠上一个A
+        4.鼠标悬停在任意一个上，背景色变颜色
+        5.鼠标悬停在任意一个上，鼠标变成手
+
+
+        技术：
+        1.修改高度：
+            之前元素的高度：height:0
+            之后的高度：heihht:像素 | 百分百 | vh | EM | auto（由内容定）
+          修改display
+            之前：display:none
+            之后：display:block
+          修改classList
+          完美方法：？
+        2.
+     -->

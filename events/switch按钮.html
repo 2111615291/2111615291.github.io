@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #button {
+            width: 200px;
+            height: 50px;
+            border: 10px solid cadetblue;
+            border-radius: 80px;
+            position: relative;
+        }
+
+        .indicator {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            position: absolute;
+            background-color: brown;
+            margin-left: 0px;
+        }
+
+        /* .yuan{
+            width: 500px;
+            height: 100px;
+            background-color: coral;
+            margin: 0 auto;
+            margin-top: 220px;
+            position: relative;
+        }
+        .bai{
+            width: 100px;
+            height: 100px;
+            background-color: rebeccapurple;
+            font-size: 90px;
+            border-radius: 50%;
+            position: absolute;
+            top: 0px;
+            left: -50px;
+        }
+        .a1{
+            width: 100px;
+            height: 100px;
+            background-color: coral;
+            border-radius: 50%;
+            position: absolute;
+            left: -50px;
+        }
+        .a2{
+            width: 100px;
+            height: 100px;
+            background-color: coral;
+            border-radius: 50%;
+            position: absolute;
+            right: -50px;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="button">
+        <i class="indicator"></i>
+    </div>
+    <script>
+        const int = document.querySelector('.indicator')
+        console.log(int);
+        const btn = document.querySelector('div')
+        let it = true
+        console.log(btn)
+        btn.onclick = function(){
+            if(it){
+                int.style.marginLeft = '150px'
+            }else{
+                int.style.marginLeft = '0px'
+            }
+            it = !it
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录特效</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            /* background-color: darkorange; */
+            background: url(/zjtp/1000.webp);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1,
+        input,
+        button {
+            margin: 0;
+        }
+
+        #login {
+            background-color: rgba(0, 0, 0, 0.5);
+            /* background: url(/zjtp/510.jpg); */
+            padding: 40px;
+            border-radius: 5px;
+        }
+
+        h1 {
+            padding: 20px 0 40px;
+            color: #fff;
+            text-align: center;
+        }
+        p{
+            color: #fff;
+        }
+        a{
+            color: black;
+        }
+
+        form input {
+            border: none;
+            width: 300px;
+            color: #fff;
+        }
+
+        form input:not(input[type=button]) {
+            border-bottom: 2px solid wheat;
+            /*透明*/
+            background-color: transparent;
+            padding: 10px 0;
+            font-size: 20px;
+        }
+
+        form input:not(input[type=button]):focus {
+            outline: none;
+        }
+        form input:not(input[type=button]) + label span{
+            display: inline-block;
+            transition: .3s;
+        }
+        form input:not(input[type=button]):focus + label span{
+            transform: translateY(-30px);
+        }
+
+        form label {
+            position: absolute;
+            left: 0;
+            top: 15px;
+        }
+
+        .input {
+            /* border: 1px solid black; */
+            position: relative;
+            color: #fff;
+            margin-top: 30px;
+
+        }
+
+        [type="button"] {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: rebeccapurple;
+        }
+
+        [type="button"]:hover {
+            background-color: rebeccapurple;
+            cursor: pointer;
+        }
+
+        [type="button"]:active {
+            transform: scale(.98);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login">
+        <h1>登录</h1>
+        <form action="#">
+            <div class="row input">
+                <input type="text">
+                <label>Email</label>
+                <!-- <label>
+                    <span style="transition-delay: i* 50 ms;">E</span>
+                    <span>m</span>
+                    <span>a</span>
+                    <span>i</span>
+                    <span>l</span>
+                </label> -->
+            </div>
+            <div class="row input">
+                <input type="password">
+                <label>Passwords</label>
+            </div>
+            <div class="row">
+                <input type="button" value="登录">
+            </div>
+        </form>
+        <p>没有账户，请先<a href="">注册</a></p>
+    </div>
+
+    <script>
+        const labels = document.querySelectorAll('label')
+
+        // let str = ''
+
+        labels.forEach(label => {
+            label.innerHTML = label.innerHTML.split('').map((letter,index) => {
+                return `<span style="transition-delay:${50*index}ms">${letter}</span>`
+            }).join('')
+
+            // lable.innerHTML = str
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #h2 {
+            background-color: red;
+        }
+
+        .color {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="h2" class="color" style="border:5px solid black;">Hello world</h2>
+    <script>
+        // 批量删除H2的全部属性
+
+        const h2 = document.querySelector('h2')
+        const map = h2.attributes
+
+        let arr = []
+
+        for(attr of map){
+            arr.push(attr.name)
+            //push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。
+        }
+
+        for(attr of arr){
+            h2.removeAttribute(attr)
+        }
+        console.log(h2);
+
+        // console.log(h2.removeAttribute('id'));
+        // console.log(h2.removeAttribute('class'));
+        // console.log(h2.removeAttribute('style'));
+
+    </script>
+</body>
+
+</html>

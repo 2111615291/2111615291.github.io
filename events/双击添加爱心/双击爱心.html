@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3604995_hsykzmqiq6g.css">
+    <style>
+        div {
+            margin-left: 100px;
+            width: 400px;
+            height: 668px;
+            background: red url(https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2Fe0KcS9E6j7wU7t1UQWDmoP7H5kneU%3DPvLTAOrzvdsBXgT1505471733847transferflag.png&thumbnail=660x2147483647&quality=80&type=jpg);
+            background-size: contain;
+            /* background: 颜色 ; */
+            position: relative;
+            overflow: hidden;
+        }
+
+        i {
+            color: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* transform: translate(-50%,-50%) scale(0); */
+            /* transition: 1s; */ /* 当属性发生变化时生效 */
+            animation: big .6s linear;
+        }
+        @keyframes big {
+            from{
+                transform: translate(-50%,-50%) scale(0);
+                opacity: 1;
+            }
+            to{ /* 100% */
+                transform: translate(-50%,-50%) scale(4);
+                opacity: 0;
+            }
+        }
+
+        .iconfont {
+            font-size: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <i class="iconfont icon-aixin"></i> -->
+    <div></div>
+
+    <!-- 
+        客服：双击图片添加红心
+        需求分享：
+        1.双击图片，显示红心
+        2.红心跟随鼠标显示
+        3.红心使用特效显示
+        4.显示完毕再消失
+
+        技术分析：
+        1.dblclick双击事件 + 在线图标 + 显示红心 + createElement() + appendChild()
+        2.i标签的left = mouseX - div。offsetLeft - 红心的宽度的一半
+        3.使用CSS animation属性创建scale opacity动画效果
+        4.heart.remove()
+     -->
+
+    <script>
+        const div = document.querySelector('div')
+
+        div.addEventListener('dblclick', (ev) => {
+            const heart = document.createElement('i') //创建了一个这样的<i></i>
+            heart.classList.add('iconfont') //接口的 add() 方法将给定的标记添加到列表中。
+            heart.classList.add('icon-aixin')
+            //classList 是一个只读属性，返回一个元素 class 属性的动态集合。这可以用于操作 class 集合。
+            //思路2：先再处理样式，先绑定DOM
+            heart.style.left = ev.pageX - div.offsetLeft  + 'px'
+            heart.style.top = ev.pageY - div.offsetTop  + 'px'
+            div.appendChild(heart)
+            //思路1：先绑定DOM，再处理样式
+            // heart.style.left = ev.pageX - div.offsetLeft - heart.offsetWidth/2 + 'px'
+            // heart.style.top = ev.pageY - div.offsetTop - heart.offsetHeight/2 + 'px'
+            //Node.appendChild() 方法将一个节点附加到指定父节点的子节点列表的末尾处
+            heart.style.transform = 'scale(2)'
+            // 定时器
+            setTimeout(() => {
+                heart.remove()
+            }, 500)
+        })
+        
+
+
+    </script>
+</body>
+
+</html>

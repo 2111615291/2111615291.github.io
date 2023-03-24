@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 600px;
+            border: 1px solid rebeccapurple;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .waterDiv {
+            position: absolute;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div class="waterDiv">
+            <img src="https://via.placeholder.com/100x200" alt="" class="waterImg">
+        </div>
+        <div class="waterDiv">
+            <img src="https://via.placeholder.com/100x200" alt="" class="waterImg">
+        </div>
+        <div class="waterDiv">
+            <img src="https://via.placeholder.com/100x200" alt="" class="waterImg">
+        </div> -->
+    </div>
+    <script>
+        const app = document.querySelector('#app')
+        const col = 3
+        const url = `https://api.unsplash.com/photos/random?count=20&client_id=nmPp8tCEgy2Or7AZj9GYYrsw5Jl8tGYno0TXMoBiPG4`
+        const heightArr = [0, 0, 0]
+
+        function getMinHeightIndex(arr) {
+            return arr.indexOf(Math.min.apply(null, arr))
+        }
+        let r = getMinHeightIndex(heightArr)
+
+        //解析数据：async ... async 必须出现在async内部
+        function waterFall(API) {
+            let fetchData = async function (API) { //目标：返回一个带着数据的promise
+                //获取数据
+                // let data = fetch(API) //返回promise => value:response对象
+                // let data = await fetch(API) //返回response对象 => value:response对象
+                // console.log(await data.json()); //通过promise获取到成功的值
+                return await (await fetch(API)).json()
+            }
+            fetchData(API).then(data => { //使用回调渲染页面
+                for (item of data) {
+                    const div = document.createElement('div')
+                    const img = document.createElement('img')
+                    img.src = item.urls.small
+                    div.className = 'waterDiv'
+                    img.className = 'waterImg'
+                    //设置div的width = 
+                    div.style.width = app.offsetWidth / col + 'px'
+                    div.style.height = app.offsetWidth / col * item.height / item.width + 'px'
+                    div.style.top = heightArr[getMinHeightIndex(heightArr)] + 'px'
+                    div.style.left = getMinHeightIndex(heightArr) * parseInt(div.style.width) + 'px'
+                    heightArr[getMinHeightIndex(heightArr)] += parseInt(div.style.height)
+                    div.appendChild(img)
+                    app.appendChild(div)
+                }
+            })
+        }
+        waterFall(url)
+
+        window.addEventListener('scorll', () => {
+            const { scrollHeight: a, scrollTop: b, clientHeight: c } = document.documentElement
+            // if (a + b >= c && no) {
+            //     waterFall(url)
+            //     no = false
+            // }
+        })
+
+        //获取数据：frtch()
+        // let request = fetch(url)
+        //     .then(response => response.json())
+        //     .then(data => console.log(data))
+        // const div = document.createElement('div')
+        // div.innerHTML = fetchData
+        // app.appendChild(div)
+        // console.log(request);
+        // app.innerHTML = request
+
+    </script>
+</body>
+
+</html>
